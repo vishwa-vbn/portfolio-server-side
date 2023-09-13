@@ -23,6 +23,13 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
+
+app.use(cors({
+  origin: 'https://portfolio-frontend-dun.vercel.app', // Replace with your frontend URL
+  methods: 'GET,POST', // Adjust the allowed HTTP methods as needed
+  credentials: true, // Allow cookies and credentials
+}));
+
 app.use(
   session({
     secret: 'vbn_the_web_dev',
@@ -40,13 +47,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    origin: "https://portfolio-frontend-dun.vercel.app",
-    methods: 'GET,POST,PUT,DELETE',
-    credentials: true,
-  })
-);
+
 
 passport.use(
   new GoogleStrategy(
