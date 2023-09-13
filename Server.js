@@ -42,7 +42,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "https://portfolio-frontend-dun.vercel.app/",
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
   })
