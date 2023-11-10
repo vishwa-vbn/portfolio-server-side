@@ -398,6 +398,41 @@ app.delete('/deleteSkill/:id', async (req, res) => {
 
 
 
+
+const createDefaultAdmin = async () => {
+  try {
+    const defaultAdminEmail = 'vishwabnaik12@gmail.com';
+    const defaultAdminPassword = 'vbn@portfolio';
+
+    // Check if the admin already exists
+    const existingAdmin = await Admin.findOne({ email: defaultAdminEmail });
+
+    if (!existingAdmin) {
+      // Admin doesn't exist, create a new one
+      const hashedPassword = await bcrypt.hash(defaultAdminPassword, 10);
+      const newAdmin = new Admin({
+        email: defaultAdminEmail,
+        password: hashedPassword,
+      });
+
+      await newAdmin.save();
+      console.log('Default admin created successfully!');
+    } else {
+      console.log('Default admin already exists.');
+    }
+  } catch (error) {
+    console.error('Error creating default admin:', error);
+  }
+};
+
+// Call the function to create the default admin when the server starts
+createDefaultAdmin();
+
+
+
+
+
+
 const generateSecretKey = () => {
   const keyLength = 32; // 256 bits
   return crypto.randomBytes(keyLength).toString('hex');
