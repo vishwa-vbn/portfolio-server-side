@@ -431,8 +431,6 @@ createDefaultAdmin();
 
 
 
-
-
 const generateSecretKey = () => {
   const keyLength = 32; // 256 bits
   return crypto.randomBytes(keyLength).toString('hex');
